@@ -5,7 +5,7 @@ import java.nio.channels.FileChannel;
 import java.util.Random;
 
 public final class Main {
-        private static final File FILE = new File("file.dat");
+        private static final File FILE = new File("file1.dat");
         private static final Random rnd = new Random();
 
         private static final int Sleep_ = 1000;
@@ -49,6 +49,7 @@ public final class Main {
         }
 
         public void write(int itcount){
+            System.out.println("LOW");
             boolean goInf = (itcount <=0);
             int itLEft = itcount;
             while(goInf || itLEft > 0)
@@ -58,10 +59,11 @@ public final class Main {
                 int lastOp = _buff.getInt();
                 if(lastOp == OperationMode.Read.getMark())
                 {
+                    System.out.println("LOW2");
                     int a1 = rnd.nextInt();
                     int a2 = rnd.nextInt();
                     _buff.rewind();
-                    _buff.putInt(cont).putInt(OperationMode.Read.getMark()).putInt(a1).putInt(a2);
+                    _buff.putInt(cont).putInt(OperationMode.Write.getMark()).putInt(a1).putInt(a2);
                     if(!goInf)
                         itLEft--;
                 }
@@ -78,8 +80,10 @@ public final class Main {
                 _buff.rewind();
                 int stopcont = _buff.getInt();
                 int lastOp = _buff.getInt();
-                if(stopcont == stop && lastOp == OperationMode.Write.getMark())
+                if(stopcont == stop && lastOp == OperationMode.Write.getMark()) {
+                    System.out.println("LOL");
                     break main;
+                }
                 else{
                     if(lastOp == OperationMode.Write.getMark()){
                         int a1 = _buff.getInt();
