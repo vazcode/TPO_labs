@@ -8,7 +8,7 @@ public final class Main {
         private static final File FILE = new File("file.dat");
         private static final Random rnd = new Random();
 
-        private static final int Sleep_ = 100;
+        private static final int Sleep_ = 1000;
         private static final int buff_ = 16;
         private static final int it_count = 10;
         private static final int stop =-1;
@@ -54,6 +54,7 @@ public final class Main {
             while(goInf || itLEft > 0)
             {
                 _buff.rewind();
+                _buff.getInt();
                 int lastOp = _buff.getInt();
                 if(lastOp == OperationMode.Read.getMark())
                 {
@@ -72,7 +73,6 @@ public final class Main {
 
         public void read()
         {
-            System.out.println("LOL");
             main:
             while(true){
                 _buff.rewind();
@@ -95,7 +95,7 @@ public final class Main {
         }
 
 
-        public static void main(String[] args) {
+        public static void main(String... args) {
             try {
                 if (args.length < 1) {
                     System.out.println("read/write should be as argument");
